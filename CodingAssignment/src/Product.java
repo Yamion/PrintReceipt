@@ -18,8 +18,8 @@ public class Product {
             /*default constructor*/
         }
     
-    public Product(String name, boolean imported, int type, float price){
-        this.name = name;
+    public Product(String productName, boolean imported, int type, float price){
+        this.name = productName;
         this.imported = imported;
         this.type = type;
         this.price = price;

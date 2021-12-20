@@ -1,0 +1,30 @@
+Classes:
+
+Product
+	attributs:
+		name (string)
+		type (by number(?),int ,to determine the tax)
+		imported (boolean)
+		price (2 decimal digits, double/float)
+	
+
+Shopping cart: 	
+	attributes:	
+		products (array of products)
+	methods:
+		addProduct
+		removeProduct
+
+Receipt
+	attributes:
+		content (string, to write all printdata in)
+	methods:
+		calcTax
+		printReceipt
+
+
+Methods:
+addToCart
+removeFromCart
+printReceipt
+calcTax

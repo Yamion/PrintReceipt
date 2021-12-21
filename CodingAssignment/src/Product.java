@@ -1,30 +1,38 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
+
 
 /**
  *
  * @author Thomas
  */
 public class Product {
+    
+    public static int productCounter;
+    
     private String name = "";
     private boolean imported = false;
-    private int type = 0;
-    private double price = 0.0;
+    private boolean exempt = false; /* true for books, food, medical products*/
+    private double priceNoTax = 0.0;
     /*default parameters for Product*/
 
     public Product(){
+        productCounter++;
             /*default constructor*/
         }
     
-    public Product(String productName, boolean imported, int type, float price){
+    public Product(String productName, boolean imported, boolean exempt, float price){
         this.name = productName;
         this.imported = imported;
-        this.type = type;
-        this.price = price;
+        this.exempt = exempt;
+        this.priceNoTax = price;
+        productCounter++;
         /*constructor for class Product*/
     }
+    
+    public static int numberOfProducts() {
+        return productCounter;
+    }
+    
     
     
 }

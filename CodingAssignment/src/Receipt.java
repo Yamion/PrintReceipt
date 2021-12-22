@@ -43,7 +43,7 @@ public class Receipt {
         case 1:
             ShoppingCart.addProduct();
         case 2:
-            ShoppingCart.removeProduct();
+            //ShoppingCart.removeProduct();
         case 3:
             Receipt.printReceipt();
         
@@ -51,6 +51,8 @@ public class Receipt {
             System.out.println("Error: Undefined action!");
                                 break;
     }
+    
+    
             
 
     //System.out.println("You have chosen option " + option);

@@ -7,7 +7,7 @@
  */
 public class Product {
     
-    public static int productCounter;
+    public static int productCounter = 0;
     
     private String name = "";
     private boolean imported = false;
@@ -31,6 +31,8 @@ public class Product {
         productCounter++;
         /*constructor for class Product*/
     }
+    //public String
+    
     
     public static int numberOfProducts() {
         return productCounter;
@@ -56,7 +58,7 @@ public class Product {
         }
     }
     
-    public double calculateFinalPrice(){
+    public double calculateFinalPrice(){ /*calculates the final price with tax for the Product object*/
         double finalPrice = this.priceNoTax;
         double salesTax = 0.00f;
         salesTax = setTax()*this.priceNoTax;
@@ -64,12 +66,17 @@ public class Product {
         return finalPrice;
     }
     
-    public String buildString() {
-        this.productString = "1 " + this.name + ": " + calculateFinalPrice() +"\n";
+    public String buildString() { /*builds the String output for the Product object*/
+        if(this.imported == false) {
+        this.productString = "1 " + this.name + ": " + this.calculateFinalPrice() +"\n";
+        }
+        else {
+        this.productString = "1 imported " + this.name + ": " + this.calculateFinalPrice() +"\n";    
+        }
         return this.productString;
     }
     
-    public double calculateSalesTax(){
+    public double calculateSalesTax(){ /*calculates the sales tax for the Product object*/
         double finalPrice = this.priceNoTax;
         double salesTax = setTax()*this.priceNoTax; 
         return salesTax;

@@ -17,8 +17,12 @@ import org.junit.jupiter.api.Test;
  */
 public class Receipt {
 
-    private static void printReceipt() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    private static void printReceipt(ShoppingCart cart) {
+    System.out.println("Your shopping receipt:\n");
+    System.out.println(cart.createReceipt(cart.content));
+    System.out.println("Sales Taxes: " + cart.calcTotalSalesTax(cart.content) + "\n");
+    System.out.println("Total: " + cart.calcTotal(cart.content));
+        
     }
     
     
@@ -37,21 +41,27 @@ public class Receipt {
                     output String
         */
     ShoppingCart cart = new ShoppingCart();
-    System.out.println("Please select an action: \n1 Add product to cart\n2 Remove product from cart\n3 Print receipt.\r" ); /*command line User interface*/
+    while(true){
+    System.out.println("Please select an action: \n1 Add product to cart\n2 Remove product from cart\n3 Print receipt.\n" ); /*command line User interface*/
     int option = input.nextInt();
     switch(option) {
         case 1:
-            ShoppingCart.addProduct();
+            cart.content[Product.productCounter] = cart.addProduct();
+            Product.productCounter++;
+            //cart.addProduct();
+        continue;
         case 2:
+            System.out.println("Action not yet implemented!");
             //ShoppingCart.removeProduct();
+        continue;
         case 3:
-            Receipt.printReceipt();
-        
+            Receipt.printReceipt(cart);
+        continue;
         default:
             System.out.println("Error: Undefined action!");
-                                break;
+        continue;
+        }
     }
-    
     
             
 

@@ -40,20 +40,23 @@ public class Product {
     
     public double setTax(){ /*sets the tax for the product*/
         switch(exempt + "-" + imported){
-            case "true-true":
+            case "true-true" -> {
                 tax = 0.05;
                 return tax;
-            case "true-false":
+            }
+            case "true-false" -> {
                 tax = 0.00;
                 return tax;
-            case "false-false":
+            }
+            case "false-false" -> {
                 tax = 0.10;
                 return tax;
-            case "false-true":
+            }
+            case "false-true" -> {
                 tax = 0.15;
                 return tax;
-            default:
-                throw new RuntimeException(
+            }
+            default -> throw new RuntimeException(
                     "something went wrong with the import/exempt check, exempt:" + exempt + ", imported: " + imported); 
         }
     }

@@ -9,8 +9,8 @@
  */
 public class ShoppingCart {
     
-    private static int productsInCart = 0;  /*number of products in cart*/
-    public static Product[] content = new Product[20]; /*array of products in cart*/
+    public static int productsInCart = 0;  /*number of products in cart*/
+    public static Product[] content = new Product[100]; /*array of products in cart*/
     //private static double totalSalesTax;
     
     
@@ -69,27 +69,33 @@ public class ShoppingCart {
     return newProduct;
     }
     
-    public String createReceipt(Product[] cartContent){
+    public String createReceipt(Product[] inCart){
         String receiptOutput = "";
-        for(int i = 0; i < cartContent.length; i++){
-        receiptOutput += cartContent[i].buildString() + "\n" ;
-        System.out.println("added:"+cartContent[i].buildString()+"to the receipt."); //for debugging
+        for (Product cartContent : inCart) {
+            if(cartContent == null) //break the loop if next array element is null)
+                break;
+            receiptOutput += cartContent.buildString() + "\n";
+            //System.out.println("added:" + cartContent.buildString() + "to the receipt."); //for debugging
         }        
         return receiptOutput;
     }
     
-    public double calcTotalSalesTax(Product[] cartContent){ /* iterates over the shoppingCart content array and adds up the sales tax for each product*/
+    public double calcTotalSalesTax(Product[] inCart){ /* iterates over the shoppingCart content array and adds up the sales tax for each product*/
         double totalSalesTax = 0.0f;
-        for(int i = 0; i < cartContent.length; i++){
-            totalSalesTax += cartContent[i].calculateSalesTax();
+        for (Product cartContent : inCart) {
+            if(cartContent == null) //break the loop if next array element is null)
+                break;
+            totalSalesTax += cartContent.calculateSalesTax();
         }
         return totalSalesTax;
     }
     
-    public double calcTotal(Product[] cartContent) {
+    public double calcTotal(Product[] inCart) {
         double total = 0.0f;
-        for(int i = 0; i < cartContent.length; i++) {
-            total += cartContent[i].calculateFinalPrice();
+        for (Product cartContent : inCart) {
+            if(cartContent == null) //break the loop if next array element is null)
+                break;
+            total += cartContent.calculateFinalPrice();
         }
         return total;
     }

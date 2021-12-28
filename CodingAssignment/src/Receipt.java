@@ -45,21 +45,25 @@ public class Receipt {
     System.out.println("Please select an action: \n1 Add product to cart\n2 Remove product from cart\n3 Print receipt.\n" ); /*command line User interface*/
     int option = input.nextInt();
     switch(option) {
-        case 1:
-            cart.content[Product.productCounter] = cart.addProduct();
-            Product.productCounter++;
+        case 1 -> {
+            ShoppingCart.content[ShoppingCart.productsInCart] = ShoppingCart.addProduct();
+            ShoppingCart.productsInCart++;
             //cart.addProduct();
-        continue;
-        case 2:
+            continue;
+            }
+        case 2 -> {
             System.out.println("Action not yet implemented!");
             //ShoppingCart.removeProduct();
-        continue;
-        case 3:
+            continue;
+            }
+        case 3 -> {
             Receipt.printReceipt(cart);
-        continue;
-        default:
-            System.out.println("Error: Undefined action!");
-        continue;
+            continue;
+            }
+        default -> {
+                System.out.println("Error: Undefined action!");
+                continue;
+            }
         }
     }
     

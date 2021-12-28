@@ -5,6 +5,7 @@ import java.util.Scanner;
 import javax.xml.transform.OutputKeys;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
+import java.math.BigDecimal;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license

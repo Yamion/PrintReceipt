@@ -1,4 +1,7 @@
 
+import java.math.BigDecimal;
+
+
 
 
 /**
@@ -12,9 +15,11 @@ public class Product {
     private String name = "";
     private boolean imported = false;
     private boolean exempt = false; /* true for books, food, medical products*/
-    private float priceNoTax = 0.0f;
+    //private float priceNoTax = 0.0f;
+    private BigDecimal priceNoTax = new BigDecimal("0.00");
     private String productString = "";
-    private double tax = 0.00;
+    //private BigDecimal tax = new BigDecimal(0.00);
+    private BigDecimal salesTax = new BigDecimal("0.00");
     /*default parameters for Product*/
 
     public Product(){
@@ -22,7 +27,7 @@ public class Product {
             /*default constructor*/
         }
     
-    public Product(String productName, boolean exempt, boolean imported, float price){
+    public Product(String productName, boolean exempt, boolean imported, BigDecimal price){
         this.name = productName;
         this.exempt = exempt;        
         this.imported = imported;
@@ -38,22 +43,23 @@ public class Product {
         return productCounter;
     }
     
-    public double setTax(){ /*sets the tax for the product*/
+    public BigDecimal setTax(){ /*sets the tax for the product*/
+        BigDecimal tax = new BigDecimal("0.00");
         switch(exempt + "-" + imported){
             case "true-true" -> {
-                tax = 0.05;
+                tax = new BigDecimal("0.05");
                 return tax;
             }
             case "true-false" -> {
-                tax = 0.00;
+                tax = new BigDecimal("0.00");
                 return tax;
             }
             case "false-false" -> {
-                tax = 0.10;
+                tax = new BigDecimal("0.10");
                 return tax;
             }
             case "false-true" -> {
-                tax = 0.15;
+                tax = new BigDecimal("0.15");
                 return tax;
             }
             default -> throw new RuntimeException(
@@ -61,28 +67,25 @@ public class Product {
         }
     }
     
-    public double calculateFinalPrice(){ /*calculates the final price with tax for the Product object*/
-        double finalPrice = this.priceNoTax;
-        double salesTax = 0.00f;
-        salesTax = setTax()*this.priceNoTax;
-        finalPrice += salesTax;
-        return finalPrice;
+    public BigDecimal calculateFinalPrice(){ /*calculates the final price with tax for the Product object*/
+        salesTax = this.priceNoTax.multiply(setTax());
+        return this.priceNoTax.add(salesTax);
     }
     
     public String buildString() { /*builds the String output for the Product object*/
         if(this.imported == false) {
         this.productString = "1 " + this.name + ": " + this.calculateFinalPrice() +"\n";
+        return this.productString;
         }
         else {
         this.productString = "1 imported " + this.name + ": " + this.calculateFinalPrice() +"\n";    
-        }
         return this.productString;
+        }
+        
     }
     
-    public double calculateSalesTax(){ /*calculates the sales tax for the Product object*/
-        double finalPrice = this.priceNoTax;
-        double salesTax = setTax()*this.priceNoTax; 
-        return salesTax;
+    public BigDecimal calculateSalesTax(){ /*calculates the sales tax for the Product object*/
+        return this.priceNoTax.multiply(setTax());
     }    
     
     

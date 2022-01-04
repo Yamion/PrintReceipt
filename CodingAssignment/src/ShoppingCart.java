@@ -1,5 +1,7 @@
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -33,46 +35,35 @@ public class ShoppingCart {
     System.out.println("\nChoose the type of product:\n1 book\n2 food\n3 medical product\n4 others\n");
     productType = Receipt.input.nextInt();     
     switch(productType){
-        case 1:
-            exempt = true;
-            break;
+        case 1 -> exempt = true;
         
-        case 2:
-            exempt = true;
-            break;
+        case 2 -> exempt = true;
         
-        case 3:
-            exempt = true;
-            break;
+        case 3 -> exempt = true;
             
-        case 4:
-            exempt = false;
-            break;
-        default:
-            System.out.println("Error: invalid answer!");
-            continue;
+        case 4 -> exempt = false;
+        default -> {
+                System.out.println("Error: invalid answer!");
+                continue;
+                }
         }
         break;
     }
     Receipt.input.nextLine(); //consumes the rest of the line
     while(true){
         System.out.println("\nHas the product been imported?\n");
-        Receipt.input.nextLine(); //consumes the rest of the line
         input = Receipt.input.nextLine();
         switch(input){
-            case "yes":
-                imported = true;
-                break;
-            case "no":
-                imported = false;
-                break;
-        default:
-            System.out.println("Error: invalid answer!");
-            continue;
+            case "yes" -> imported = true;
+            case "no" -> imported = false;
+        default -> {
+                System.out.println("Error: invalid answer!");
+                continue;
+                }
         }
         break;
     }
-    System.out.println("Please enter the product's price.\n");
+    System.out.println("\nPlease enter the product's price.\n");
     productPrice = Receipt.input.nextBigDecimal();
     
     Product newProduct = new Product(productName, exempt, imported, productPrice);
@@ -96,8 +87,9 @@ public class ShoppingCart {
         for (Product cartContent : inCart) {
             if(cartContent == null) //break the loop if next array element is null)
                 break;
-            totalSalesTax.add(cartContent.calculateSalesTax());
+            totalSalesTax = totalSalesTax.add(cartContent.calculateSalesTax());
         }
+        totalSalesTax = roundTax(totalSalesTax);
         return totalSalesTax;
     }
     
@@ -112,8 +104,67 @@ public class ShoppingCart {
     }
     
     
+    public BigDecimal roundTax(BigDecimal input){
+        BigDecimal rounded = input.setScale(2, RoundingMode.HALF_UP);
+        BigDecimal moved = rounded.movePointRight(2);
+        BigDecimal remainder = moved.remainder(BigDecimal.TEN);
+        if(remainder.equals(new BigDecimal("0")))
+            return rounded;
+        if(remainder.equals(new BigDecimal("1"))){
+            rounded=rounded.add(new BigDecimal("4"));
+            rounded=rounded.movePointLeft(2);
+            return rounded;
+        }
+        if(remainder.equals(new BigDecimal("2"))){
+            rounded=rounded.add(new BigDecimal("3"));
+            rounded=rounded.movePointLeft(2);
+            return rounded;            
+        }
+        if(remainder.equals(new BigDecimal("3"))){
+            rounded=rounded.add(new BigDecimal("2"));
+            rounded=rounded.movePointLeft(2);
+            return rounded;
+        }
+        if(remainder.equals(new BigDecimal("4"))){
+            rounded=rounded.add(new BigDecimal("1"));
+            rounded=rounded.movePointLeft(2);
+            return rounded;            
+        }
+        if(remainder.equals(new BigDecimal("5"))){
+            return rounded;
+        }
+        if(remainder.equals(new BigDecimal("6"))){
+            rounded=rounded.add(new BigDecimal("4"));
+            rounded=rounded.movePointLeft(2);
+            return rounded;            
+        }
+        if(remainder.equals(new BigDecimal("7"))){
+            rounded=rounded.add(new BigDecimal("3"));
+            rounded=rounded.movePointLeft(2);
+            return rounded;            
+        }
+        if(remainder.equals(new BigDecimal("8"))){
+            rounded=rounded.add(new BigDecimal("2"));
+            rounded=rounded.movePointLeft(2);
+            return rounded;            
+        }
+        if(remainder.equals(new BigDecimal("9"))){
+            rounded=rounded.add(new BigDecimal("1"));
+            rounded=rounded.movePointLeft(2);
+            return rounded;            
+        }
+        else
+            System.out.println("Error in roundTax!!!");
+            return input;
+    }
+      
+            
+        
+    
+    
     /*
     public static void removeProduct() {
     }
     */
+    
 }

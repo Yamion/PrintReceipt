@@ -1,5 +1,6 @@
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 
 
@@ -67,11 +68,15 @@ public class Product {
         }
     }
     
-    public BigDecimal calculateFinalPrice(){ /*calculates the final price with tax for the Product object*/
+    public BigDecimal calculateFinalPrice(){ /*calculates the final price with tax for the Product object and rounds HALF_UP to 2 decimals*/
         salesTax = this.priceNoTax.multiply(setTax());
-        return this.priceNoTax.add(salesTax);
+        BigDecimal finalPrice = new BigDecimal("0.00");
+        finalPrice = this.priceNoTax.add(salesTax);
+        finalPrice = finalPrice.setScale(2,RoundingMode.HALF_UP);
+        return finalPrice;
     }
     
+
     public String buildString() { /*builds the String output for the Product object*/
         if(this.imported == false) {
         this.productString = "1 " + this.name + ": " + this.calculateFinalPrice() +"\n";

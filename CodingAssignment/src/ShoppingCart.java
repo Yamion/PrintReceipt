@@ -1,4 +1,5 @@
 
+
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
@@ -63,7 +64,7 @@ public class ShoppingCart {
         }
         break;
     }
-    System.out.println("\nPlease enter the product's price.\n");
+    System.out.println("\nPlease enter the product's price.(e.g. 1,99)\n");
     productPrice = Receipt.input.nextBigDecimal();
     
     Product newProduct = new Product(productName, exempt, imported, productPrice);
@@ -162,9 +163,25 @@ public class ShoppingCart {
         
     
     
-    /*
+    
     public static void removeProduct() {
+        int counter = 0;
+        System.out.println("Choose which product to remove:");
+        for (Product cartContent : content) {
+            if(cartContent == null) //break the loop if next array element is null)
+                break;
+            System.out.println(counter+1 + ": " + cartContent.name);
+            counter++;
+        }
+        int option = Receipt.input.nextInt();
+        for(int i = option; i < productsInCart; i++){
+            content[i-1] = content[i];
+        }
+        content[productsInCart-1] = null;
+        
+                
     }
-    */
+    
+    
     
 }

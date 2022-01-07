@@ -19,7 +19,7 @@ import java.math.BigDecimal;
 public class Receipt {
 
     private static void printReceipt(ShoppingCart cart) {
-    System.out.println("Your shopping receipt:\n");
+    System.out.println("\nYour shopping receipt:\n");
     System.out.println(cart.createReceipt(cart.content));
     System.out.println("Sales Taxes: " + cart.calcTotalSalesTax(cart.content) + "\n");
     System.out.println("Total: " + cart.calcTotal(cart.content));
@@ -43,18 +43,18 @@ public class Receipt {
         */
     ShoppingCart cart = new ShoppingCart();
     while(true){
-    System.out.println("Please select an action: \n1 Add product to cart\n2 Remove product from cart\n3 Print receipt.\n" ); /*command line User interface*/
+    System.out.println("\nPlease select an action: \n1 Add product to cart\n2 Remove product from cart\n3 Print receipt.\n" ); /*command line User interface*/
     int option = input.nextInt();
     switch(option) {
         case 1 -> {
+            clearScreen();
             ShoppingCart.content[ShoppingCart.productsInCart] = ShoppingCart.addProduct();
             ShoppingCart.productsInCart++;
-            //cart.addProduct();
             continue;
             }
         case 2 -> {
-            System.out.println("Action not yet implemented!");
-            //ShoppingCart.removeProduct();
+            //System.out.println("Action not yet implemented
+            ShoppingCart.removeProduct();
             continue;
             }
         case 3 -> {
@@ -68,10 +68,13 @@ public class Receipt {
         }
     }
     
-            
+ 
 
     //System.out.println("You have chosen option " + option);
 
     }
-    
+    public static void clearScreen() {  /*supposed to clear the console, but not working*/
+    System.out.print("\033[H\033[2J");  
+    System.out.flush();  
+    }    
 }

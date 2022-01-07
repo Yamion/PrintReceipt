@@ -13,7 +13,7 @@ public class Product {
     
     public static int productCounter = 0;
     
-    private String name = "";
+    public String name = "";
     private boolean imported = false;
     private boolean exempt = false; /* true for books, food, medical products*/
     //private float priceNoTax = 0.0f;

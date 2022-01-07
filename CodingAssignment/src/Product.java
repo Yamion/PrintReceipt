@@ -68,11 +68,12 @@ public class Product {
         }
     }
     
-    public BigDecimal calculateFinalPrice(){ /*calculates the final price with tax for the Product object and rounds HALF_UP to 2 decimals*/
+    public BigDecimal calculateFinalPrice(){ /*calculates the final price with rounded salestax for the Product*/
         salesTax = this.priceNoTax.multiply(setTax());
+        salesTax = this.roundTax(salesTax);
         BigDecimal finalPrice = new BigDecimal("0.00");
         finalPrice = this.priceNoTax.add(salesTax);
-        finalPrice = finalPrice.setScale(2,RoundingMode.HALF_UP);
+        //finalPrice = finalPrice.setScale(2,RoundingMode.HALF_UP);
         return finalPrice;
     }
     
@@ -93,6 +94,58 @@ public class Product {
         return this.priceNoTax.multiply(setTax());
     }    
     
-    
+    public BigDecimal roundTax(BigDecimal input){
+        BigDecimal rounded = input.setScale(2, RoundingMode.HALF_UP);
+        BigDecimal moved = rounded.movePointRight(2);
+        BigDecimal remainder = moved.remainder(BigDecimal.TEN);
+        if(remainder.equals(new BigDecimal("0")))
+            return rounded;
+        if(remainder.equals(new BigDecimal("1"))){
+            moved=moved.add(new BigDecimal("4"));
+            moved=moved.movePointLeft(2);
+            return moved;
+        }
+        if(remainder.equals(new BigDecimal("2"))){
+            moved=moved.add(new BigDecimal("3"));
+            moved=moved.movePointLeft(2);
+            return moved;            
+        }
+        if(remainder.equals(new BigDecimal("3"))){
+            moved=moved.add(new BigDecimal("2"));
+            moved=moved.movePointLeft(2);
+            return moved;
+        }
+        if(remainder.equals(new BigDecimal("4"))){
+            moved=moved.add(new BigDecimal("1"));
+            moved=moved.movePointLeft(2);
+            return moved;            
+        }
+        if(remainder.equals(new BigDecimal("5"))){
+            return rounded;
+        }
+        if(remainder.equals(new BigDecimal("6"))){
+            moved=moved.add(new BigDecimal("4"));
+            moved=moved.movePointLeft(2);
+            return moved;            
+        }
+        if(remainder.equals(new BigDecimal("7"))){
+            moved=moved.add(new BigDecimal("3"));
+            moved=moved.movePointLeft(2);
+            return moved;            
+        }
+        if(remainder.equals(new BigDecimal("8"))){
+            moved=moved.add(new BigDecimal("2"));
+            moved=moved.movePointLeft(2);
+            return moved;            
+        }
+        if(remainder.equals(new BigDecimal("9"))){
+            moved=moved.add(new BigDecimal("1"));
+            moved=moved.movePointLeft(2);
+            return moved;            
+        }
+        else
+            System.out.println("Error in roundTax!!!");
+            return input;
+    }
     
 }

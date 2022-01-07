@@ -89,7 +89,7 @@ public class ShoppingCart {
                 break;
             totalSalesTax = totalSalesTax.add(cartContent.calculateSalesTax());
         }
-        totalSalesTax = roundTax(totalSalesTax);
+        totalSalesTax = this.roundTax(totalSalesTax);
         return totalSalesTax;
     }
     
@@ -103,7 +103,6 @@ public class ShoppingCart {
         return total;
     }
     
-    
     public BigDecimal roundTax(BigDecimal input){
         BigDecimal rounded = input.setScale(2, RoundingMode.HALF_UP);
         BigDecimal moved = rounded.movePointRight(2);
@@ -111,52 +110,53 @@ public class ShoppingCart {
         if(remainder.equals(new BigDecimal("0")))
             return rounded;
         if(remainder.equals(new BigDecimal("1"))){
-            rounded=rounded.add(new BigDecimal("4"));
-            rounded=rounded.movePointLeft(2);
-            return rounded;
+            moved=moved.add(new BigDecimal("4"));
+            moved=moved.movePointLeft(2);
+            return moved;
         }
         if(remainder.equals(new BigDecimal("2"))){
-            rounded=rounded.add(new BigDecimal("3"));
-            rounded=rounded.movePointLeft(2);
-            return rounded;            
+            moved=moved.add(new BigDecimal("3"));
+            moved=moved.movePointLeft(2);
+            return moved;            
         }
         if(remainder.equals(new BigDecimal("3"))){
-            rounded=rounded.add(new BigDecimal("2"));
-            rounded=rounded.movePointLeft(2);
-            return rounded;
+            moved=moved.add(new BigDecimal("2"));
+            moved=moved.movePointLeft(2);
+            return moved;
         }
         if(remainder.equals(new BigDecimal("4"))){
-            rounded=rounded.add(new BigDecimal("1"));
-            rounded=rounded.movePointLeft(2);
-            return rounded;            
+            moved=moved.add(new BigDecimal("1"));
+            moved=moved.movePointLeft(2);
+            return moved;            
         }
         if(remainder.equals(new BigDecimal("5"))){
             return rounded;
         }
         if(remainder.equals(new BigDecimal("6"))){
-            rounded=rounded.add(new BigDecimal("4"));
-            rounded=rounded.movePointLeft(2);
-            return rounded;            
+            moved=moved.add(new BigDecimal("4"));
+            moved=moved.movePointLeft(2);
+            return moved;            
         }
         if(remainder.equals(new BigDecimal("7"))){
-            rounded=rounded.add(new BigDecimal("3"));
-            rounded=rounded.movePointLeft(2);
-            return rounded;            
+            moved=moved.add(new BigDecimal("3"));
+            moved=moved.movePointLeft(2);
+            return moved;            
         }
         if(remainder.equals(new BigDecimal("8"))){
-            rounded=rounded.add(new BigDecimal("2"));
-            rounded=rounded.movePointLeft(2);
-            return rounded;            
+            moved=moved.add(new BigDecimal("2"));
+            moved=moved.movePointLeft(2);
+            return moved;            
         }
         if(remainder.equals(new BigDecimal("9"))){
-            rounded=rounded.add(new BigDecimal("1"));
-            rounded=rounded.movePointLeft(2);
-            return rounded;            
+            moved=moved.add(new BigDecimal("1"));
+            moved=moved.movePointLeft(2);
+            return moved;            
         }
         else
             System.out.println("Error in roundTax!!!");
             return input;
     }
+
       
             
         

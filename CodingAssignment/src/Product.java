@@ -28,6 +28,7 @@ public class Product {
             /*default constructor*/
         }
     
+    /*constructor for class Product*/
     public Product(String productName, boolean exempt, boolean imported, BigDecimal price){
         this.name = productName;
         this.exempt = exempt;        
@@ -35,16 +36,16 @@ public class Product {
         this.priceNoTax = price;
         this.productString = "";
         productCounter++;
-        /*constructor for class Product*/
+
     }
-    //public String
     
-    
+    /* returns the current number of products in the shopping cart*/
     public static int numberOfProducts() {
         return productCounter;
     }
     
-    public BigDecimal setTax(){ /*sets the tax for the product*/
+    /*sets the tax for the product*/
+    public BigDecimal setTax(){ 
         BigDecimal tax = new BigDecimal("0.00");
         switch(exempt + "-" + imported){
             case "true-true" -> {
@@ -68,17 +69,17 @@ public class Product {
         }
     }
     
-    public BigDecimal calculateFinalPrice(){ /*calculates the final price with rounded salestax for the Product*/
+    /*calculates the final price with rounded salestax for the Product*/
+    public BigDecimal calculateFinalPrice(){ 
         salesTax = this.priceNoTax.multiply(setTax());
         salesTax = this.roundTax(salesTax);
         BigDecimal finalPrice = new BigDecimal("0.00");
         finalPrice = this.priceNoTax.add(salesTax);
-        //finalPrice = finalPrice.setScale(2,RoundingMode.HALF_UP);
         return finalPrice;
     }
     
-
-    public String buildString() { /*builds the String output for the Product object*/
+    /*builds the output string for the product*/
+    public String buildString() { 
         if(this.imported == false) {
         this.productString = "1 " + this.name + ": " + this.calculateFinalPrice() +"\n";
         return this.productString;
@@ -90,10 +91,12 @@ public class Product {
         
     }
     
-    public BigDecimal calculateSalesTax(){ /*calculates the sales tax for the Product object*/
+    /*calculates the sales tax for the Product object*/
+    public BigDecimal calculateSalesTax(){ 
         return this.priceNoTax.multiply(setTax());
-    }    
+    }   
     
+        /*rounding the tax up to 0.05 */
     public BigDecimal roundTax(BigDecimal input){
         BigDecimal rounded = input.setScale(2, RoundingMode.HALF_UP);
         BigDecimal moved = rounded.movePointRight(2);

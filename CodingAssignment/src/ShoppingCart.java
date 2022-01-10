@@ -72,6 +72,7 @@ public class ShoppingCart {
     return newProduct;
     }
     
+    /*builds the output String for all products in the cart */
     public String createReceipt(Product[] inCart){
         String receiptOutput = "";
         for (Product cartContent : inCart) {
@@ -83,7 +84,8 @@ public class ShoppingCart {
         return receiptOutput;
     }
     
-    public BigDecimal calcTotalSalesTax(Product[] inCart){ /* iterates over the shoppingCart content array and adds up the sales tax for each product*/
+    /* iterates over the shoppingCart content array and adds up the sales tax for each product*/
+    public BigDecimal calcTotalSalesTax(Product[] inCart){ 
         BigDecimal totalSalesTax = new BigDecimal("0.00");
         for (Product cartContent : inCart) {
             if(cartContent == null) //break the loop if next array element is null)
@@ -104,6 +106,7 @@ public class ShoppingCart {
         return total;
     }
     
+    /*rounding the tax up to 0.05 */
     public BigDecimal roundTax(BigDecimal input){
         BigDecimal rounded = input.setScale(2, RoundingMode.HALF_UP);
         BigDecimal moved = rounded.movePointRight(2);
@@ -163,7 +166,7 @@ public class ShoppingCart {
         
     
     
-    
+    /* remove a product from the shopping cart */
     public static void removeProduct() {
         int counter = 0;
         System.out.println("Choose which product to remove:");

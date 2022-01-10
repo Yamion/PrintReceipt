@@ -18,6 +18,7 @@ import java.math.BigDecimal;
  */
 public class Receipt {
 
+    /* outputs the receipt of all products in the shopping cart */
     private static void printReceipt(ShoppingCart cart) {
     System.out.println("\nYour shopping receipt:\n");
     System.out.println(cart.createReceipt(cart.content));

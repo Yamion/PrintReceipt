@@ -47,7 +47,6 @@ public class Receipt {
     int option = input.nextInt();
     switch(option) {
         case 1 -> {
-            clearScreen();
             ShoppingCart.content[ShoppingCart.productsInCart] = ShoppingCart.addProduct();
             ShoppingCart.productsInCart++;
             continue;
@@ -73,8 +72,10 @@ public class Receipt {
     //System.out.println("You have chosen option " + option);
 
     }
-    public static void clearScreen() {  /*supposed to clear the console, but not working*/
+    /* was supposed to clear the console for cleaner look and better readability, but it's not working
+    public static void clearScreen() {  
     System.out.print("\033[H\033[2J");  
     System.out.flush();  
-    }    
+    }*/ 
+    
 }
